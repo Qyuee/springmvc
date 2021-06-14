@@ -16,7 +16,9 @@
     <h2>상품 등록 폼</h2>
   </div>
   <h4 class="mb-3">상품 입력</h4>
-  <form action="item.html" method="post">
+  <!-- th:action이 같은 url이면 경로를 비워두어도 된다. -->
+  <!-- th:action="/basic/items/add" -->
+  <form action="item.html" th:action method="post">
     <div>
       <label for="itemName">상품명</label>
       <input type="text" id="itemName" name="itemName" class="form-control" placeholder="이름을 입력하세요">
@@ -38,7 +40,9 @@
       </div>
       <div class="col">
         <button class="w-100 btn btn-secondary btn-lg"
-                onclick="location.href='items.html'" type="button">취소</button>
+                onclick="location.href='items.html'"
+                th:onclick="|location.href='@{/basic/items}'|"
+                type="button">취소</button>
       </div>
     </div>
   </form>
