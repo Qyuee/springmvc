@@ -15,6 +15,10 @@
   <div class="py-5 text-center">
     <h2>상품 상세</h2>
   </div>
+
+  <!-- 추가 -->
+  <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
+
   <div>
     <label for="itemId">상품 ID</label>
     <input type="text" id="itemId" name="itemId" class="form-control" th:value="${item.id}" value="1" readonly>
@@ -39,6 +43,19 @@
               th:onclick="|location.href='@{/basic/items/{itemId}/edit(itemId=${item.id})}'|"
               type="button">상품 수정</button>
     </div>
+    <!--<div class="col">
+      <button class="w-100 btn btn-danger btn-lg"
+              onclick="location.href='items.html'"
+              th:onclick="|location.href='@{/basic/items/{itemId}/delete(itemId=${item.id})}'|"
+              type="button">삭제하기</button>
+    </div>-->
+    <div class="col">
+      <form class="w-100 btn btn-danger btn-lg" th:action="@{/basic/items/{itemId}/delete(itemId=${item.id})}" method="post">
+        <input type="hidden" name="_method" value="delete" />
+        <button class="link-delete-article" type="submit">삭제</button>
+      </form>
+    </div>
+
     <div class="col">
       <button class="w-100 btn btn-secondary btn-lg"
               onclick="location.href='items.html'"

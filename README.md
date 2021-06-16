@@ -1,0 +1,20 @@
+##### 스프링 MVC 학습
+- 기간: 2021-06-03 ~ 06-17
+- 학습내용
+    - 서블릿(HTTP 요청 데이터 다루기)
+    - JSP사용 및 MVC패턴 적용
+    - MVC 프레임워크 생성해보기 (Spring 사용X)
+      - Front Controller
+      - View 분리
+      - Model 추가
+      - 어댑터 패턴
+    - 스프링 MVC 구조 이해
+        - 핸들러 매핑, 핸들러 어댑터
+        - 뷰 리졸버
+        - @Controller, @RestController, @RequestMapping, @GetMapping, @PostMapping 
+        - @RequestParam, @RequestHeader
+        - @ModelAttribute, @ResponseBody
+        - 메세지 컨버터의 이해
+        - Argument Resolver의 이해
+            - 커스텀해서 추가해보기
+        - 타임리프 사용하기

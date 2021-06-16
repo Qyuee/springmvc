@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -95,10 +96,29 @@ public class BasicItemController {
      * - String, Integer 등의 타입은 @RequestParam이 적용
      * - 우리가 생성한 임의의 타입은 @ModelAttribute가 적용된다.
      */
-    @PostMapping("/add")
+    //@PostMapping("/add")
     public String addItemV4(Item item) {
         itemRepository.save(item);
-        return "basic/item";
+
+        // redirect 없이 POST /add를 호출하면 상품이 중복으로 저장된다.
+        // redirect하여 저장 후, 경로를 변경해줘야 한다.
+        // return "basic/item";
+
+        // rediect 처리
+        return "redirect:/basic/items/" + item.getId();
+    }
+
+    @PostMapping("/add")
+    public String addItemV5(Item item, RedirectAttributes redirectAttributes) {
+        Item savedItem = itemRepository.save(item);
+
+        // rediect 처리를 할 때, 아래와 같이 URL에 변수를 단순히 더하는 것은 URL 인코딩이 안되어있기에 위험하다.
+        // return "redirect:/basic/items/" + item.getId();
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+        // RedirectAttributes를 사용하여 URL인코딩 및 pathVariable, 쿼리 파라미터까지 함께 사용 할 수 있다.
+        return "redirect:/basic/items/{itemId}";
+        // http://localhost:8080/basic/items/3?status=true
     }
 
     @GetMapping("/{itemId}/edit")
@@ -112,6 +132,12 @@ public class BasicItemController {
     public String updateItem(@PathVariable Long itemId, @ModelAttribute Item item) {
         itemRepository.update(itemId, item);
         return "redirect:/basic/items/{itemId}";
+    }
+
+    @DeleteMapping("/{itemId}/delete")
+    public String deleteItem(@PathVariable Long itemId) {
+        itemRepository.delete(itemId);
+        return "redirect:/basic/items";
     }
 
     // 테스트용 데이터 삽입
