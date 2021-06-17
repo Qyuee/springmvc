@@ -1,13 +1,22 @@
 package hello.springcore.core.member;
 
+import hello.springcore.core.AppConfig;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberServiceImplTest {
-    MemberRepository memberRepository = new MemoryMemberRepository();
-    MemberService memberService = new MemberServiceImpl();
+    MemberService memberService;
+    MemberRepository memberRepository;
+
+    @BeforeEach
+    void init() {
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+        memberRepository = appConfig.memberRepository();
+    }
 
     @AfterEach
     void clear() {

@@ -14,3 +14,5 @@
 ###### Junit 어노테이션
 - @AfterEach: 각 단위테스트가 수행되고 실행되는 함수 (ex. DB초기화)
 - @Test
+- @BeforeEach: 각 단위테스트 전에 실행되는 함수 (ex. 의존성 주입)
+- @DisplayName

@@ -14,7 +14,11 @@ public class MemberServiceImpl implements MemberService{
      * │추상화에 의존해야지 구현체에 의존하면 안된다.│
      * └─────────────────────────────────────┘
      */
-    private static MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    public MemberServiceImpl(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
 
     /*@Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
