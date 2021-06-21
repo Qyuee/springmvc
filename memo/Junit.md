@@ -8,6 +8,11 @@
   ```
   assertThat(items).contains(savedItemA, savedItemB);
   ```
+  
+- assertThat(items).isSameAs(...)
+  ```
+  객체 인스턴스가 같은지 비교, ==과 동일
+  ```
 
 
 
