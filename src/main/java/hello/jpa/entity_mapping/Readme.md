@@ -15,3 +15,5 @@
 - 컬럼에 대한 제약사항 추가 가능
 - name = "컬러명", unique=true, length 등
   (DDL 생성 기능은 DDL 생성에 대해서만 영향을주고 JPA의 실행에는 영향을 주지 않는다.)
+  
+IDENTITY 전략

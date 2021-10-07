@@ -5,6 +5,7 @@
     <persistence-unit name="hello">
         <class>hello.jpa.basic.Member</class>
         <class>hello.jpa.entity_mapping.Member2</class>
+        <class>hello.jpa.entity_mapping.Member3</class>
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
