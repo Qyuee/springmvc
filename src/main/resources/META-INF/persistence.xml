@@ -7,10 +7,13 @@
         <class>hello.jpa.entity_mapping.Member2</class>
         <class>hello.jpa.entity_mapping.Member3</class>-->
 
-        <class>hello.jpa.shop.domain.Item</class>
+        <!--<class>hello.jpa.shop.domain.Item</class>
         <class>hello.jpa.shop.domain.Member</class>
         <class>hello.jpa.shop.domain.Order</class>
-        <class>hello.jpa.shop.domain.OrderItem</class>
+        <class>hello.jpa.shop.domain.OrderItem</class>-->
+
+        <class>hello.jpa.realated_mapping.Member</class>
+        <class>hello.jpa.realated_mapping.Team</class>
 
         <properties>
             <!-- 필수 속성 -->
