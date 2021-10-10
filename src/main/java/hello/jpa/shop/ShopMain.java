@@ -1,6 +1,7 @@
 package hello.jpa.shop;
 
 import hello.jpa.entity_mapping.Member3;
+import hello.jpa.shop.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,6 +16,11 @@ public class ShopMain {
 
         tx.begin();
         try {
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("Lee");
+            em.persist(book);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
