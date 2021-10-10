@@ -27,6 +27,12 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
+    // Delivery와의 1:1 연관 관계
+    // DELIVERY_ID(외래키)에 조인
+    @OneToOne
+    @JoinColumn(name = "DELIVERY_ID")
+    private Delivery delivery;
+
     // OrderItem과의 양방향 매핑 추가
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems = new ArrayList<>();

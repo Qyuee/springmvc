@@ -23,6 +23,6 @@ public class Member {
 
     // 양방향에 대한 요구사항이 발생한다.
     // 회원이 주문한 주문목록에 대한 데이터가 필요하다. -> 실제로는 별로 안좋은 설계 (주문목록이 필요하면 Order테이블을 조회하면된다.)
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 }

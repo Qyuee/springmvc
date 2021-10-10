@@ -11,9 +11,17 @@
         <class>hello.jpa.shop.domain.Member</class>
         <class>hello.jpa.shop.domain.Order</class>
         <class>hello.jpa.shop.domain.OrderItem</class>
+        <class>hello.jpa.shop.domain.Delivery</class>
+        <class>hello.jpa.shop.domain.Category</class>
 
         <!--<class>hello.jpa.realated_mapping.Member</class>
         <class>hello.jpa.realated_mapping.Team</class>-->
+
+        <!--<class>hello.jpa.realated_mapping_2.oneToMany.Team</class>
+        <class>hello.jpa.realated_mapping_2.oneToMany.Member</class>-->
+
+        <!--<class>hello.jpa.realated_mapping_2.OneToOne.Locker</class>
+        <class>hello.jpa.realated_mapping_2.OneToOne.Member</class>-->
 
         <properties>
             <!-- 필수 속성 -->
