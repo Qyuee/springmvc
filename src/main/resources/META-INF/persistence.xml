@@ -8,7 +8,7 @@
         <class>hello.jpa.entity_mapping.Member3</class>-->
 
         <!-- SHOP 예제 -->
-        <class>hello.jpa.shop.domain.Item</class>
+        <!--<class>hello.jpa.shop.domain.Item</class>
         <class>hello.jpa.shop.domain.Member</class>
         <class>hello.jpa.shop.domain.Order</class>
         <class>hello.jpa.shop.domain.OrderItem</class>
@@ -16,7 +16,7 @@
         <class>hello.jpa.shop.domain.Category</class>
         <class>hello.jpa.shop.domain.Album</class>
         <class>hello.jpa.shop.domain.Book</class>
-        <class>hello.jpa.shop.domain.Movie</class>
+        <class>hello.jpa.shop.domain.Movie</class>-->
 
         <!--<class>hello.jpa.realated_mapping.Member</class>
         <class>hello.jpa.realated_mapping.Team</class>-->
@@ -31,6 +31,9 @@
         <class>hello.jpa.advanced_mapping.Album</class>
         <class>hello.jpa.advanced_mapping.Movie</class>
         <class>hello.jpa.advanced_mapping.Book</class>-->
+
+        <class>hello.jpa.proxy_lazyLoding.Member</class>
+        <class>hello.jpa.proxy_lazyLoding.Team</class>
 
         <properties>
             <!-- 필수 속성 -->
