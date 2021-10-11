@@ -35,6 +35,9 @@
         <class>hello.jpa.proxy_lazyLoding.Member</class>
         <class>hello.jpa.proxy_lazyLoding.Team</class>
 
+        <class>hello.jpa.proxy_lazyLoding.cascade.Child</class>
+        <class>hello.jpa.proxy_lazyLoding.cascade.Parent</class>
+
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -46,7 +49,7 @@
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
     </persistence-unit>

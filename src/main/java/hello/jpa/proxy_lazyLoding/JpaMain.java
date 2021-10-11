@@ -40,11 +40,11 @@ public class JpaMain {
             //System.out.println(refMember.getClass());
             // class hello.jpa.proxy_lazyLoding.Member$HibernateProxy$x7UKM9TH --> 객체를 사용하기 전에는 쿼리가 발생하지 않는다.
 
-            /* 지연로딩 */
+            //지연로딩
             Member m1 = em.find(Member.class, member.getId()); // member테이블에만 쿼리 전달
             System.out.println(m1.getClass()); // 진짜 객체
 
-            // Team 객체는 프록시 객체이다.
+            // Team 객체는 프록시 객체이다. -> team엔티티를 아직 사용하지 않았으니 team에 대한 select 쿼리는 발생하지 않는다.
             System.out.println(m1.getTeam().getClass());
 
             tx.commit();
