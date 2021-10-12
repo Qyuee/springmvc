@@ -15,7 +15,7 @@ public class Parent {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST) // N쪽의 매핑되는 객체명을 적는다.
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true) // N쪽의 매핑되는 객체명을 적는다.
     private List<Child> childList = new ArrayList<>();
 
     public void addChild(Child child) {

@@ -28,6 +28,6 @@ public class Delivery {
 
     // 일대일 양방향 (읽기전용)
     // Order의 delivery에 매핑되었다
-    @OneToOne(mappedBy = "delivery")
+    @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
     private Order order;
 }

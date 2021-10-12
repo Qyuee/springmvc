@@ -51,6 +51,18 @@ public class JpaMain {
             // child1, child2에 대한 쿼리가 parent_id를 모르는 상태로 `SQL 임시 저장소`에 저장된다.
             // 이후에 parent를 영속화하면서 알게된 시퀀스 번호로 다시 child에 대한 update 쿼리가 별도로 생성된다.
 
+
+            em.persist(child1);
+            em.persist(child2);
+
+            /* 고아객체 테스트 */
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+            em.remove(findParent);
+            //findParent.getChildList().remove(0);    // 첫번째 child 제거 -> delete 쿼리가 발생된다.
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
