@@ -36,12 +36,12 @@ public class JpaMergeTest {
 
             System.out.println("merge한 엔티티가 영속성 컨텍스트에 있을까? "+em.contains(teamB));   // false (당연히 원래 컨텍스트에 없던 객체이므로)
             Team findTeamB = em.find(Team.class, 3L);     // 데이터가 DB에 존재함
-            System.out.println(findTeamB.getName());                // TeamBB
+            //System.out.println(findTeamB.getName());                // TeamBB
 
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
-
+            e.printStackTrace();
         } finally {
             em.close();
             emf.close();

@@ -32,11 +32,13 @@
         <class>hello.jpa.advanced_mapping.Movie</class>
         <class>hello.jpa.advanced_mapping.Book</class>-->
 
-        <class>hello.jpa.proxy_lazyLoding.Member</class>
+        <!--<class>hello.jpa.proxy_lazyLoding.Member</class>
         <class>hello.jpa.proxy_lazyLoding.Team</class>
 
         <class>hello.jpa.proxy_lazyLoding.cascade.Child</class>
-        <class>hello.jpa.proxy_lazyLoding.cascade.Parent</class>
+        <class>hello.jpa.proxy_lazyLoding.cascade.Parent</class>-->
+
+        <class>hello.jpa.value_type.Member</class>
 
         <properties>
             <!-- 필수 속성 -->
