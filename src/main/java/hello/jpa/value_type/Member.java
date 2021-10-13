@@ -23,6 +23,20 @@ public class Member {
 
     // 주소 Address
     @Embedded
-    private Address address;
+    private Address homeAddress;
+
+    // 만약 직장주소를 추가하고자 한다면?
+    // Address 객체를 재사용 할 수 있다. 근데 속성명이 겹친다.
+    // @AttributeOverrides을 통해서 속성을 재정의해준다.
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+                    column=@Column(name="work_city")),
+            @AttributeOverride(name="street",
+                    column=@Column(name="work_steert")),
+            @AttributeOverride(name="zipcode",
+                    column=@Column(name="work_zipcode"))
+    })
+    private Address workAddress;
 
 }

@@ -18,7 +18,7 @@ public class JpaMain {
         try {
             Member member = new Member();
             member.setUsername("hello");
-            member.setAddress(new Address("seoul", "서울시", "12345"));
+            member.setHomeAddress(new Address("seoul", "서울시", "12345"));
             em.persist(member);
 
             tx.commit();

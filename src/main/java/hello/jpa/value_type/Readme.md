@@ -12,3 +12,19 @@
 - 높은 응집도
 - Period.isWork()처럼 해당 값 타입만 사용하는 의미있는 메소드를 만들수 있다.
 - 임베디드 타입을 포함한 모든 값 타입은 값 타입을 소유한 엔티티의 생명주기에 의존한다.(같이 생성되고 같이 제거된다.)
+
+#### 속성 재정의
+- 임베디드 타입을 재사용할 때, 속성이 겹치는 경우 재정의 할 수 있다.
+```java
+@Embedded
+@AttributeOverrides({
+        @AttributeOverride(name="city",
+                column=@Column(name="work_city")),
+        @AttributeOverride(name="street",
+                column=@Column(name="work_steert")),
+        @AttributeOverride(name="zipcode",
+                column=@Column(name="work_zipcode"))
+})
+private Address workAddress;
+```
+![](.Readme_images/11a020fc.png)
