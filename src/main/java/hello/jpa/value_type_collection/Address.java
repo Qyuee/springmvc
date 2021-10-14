@@ -1,29 +1,29 @@
-package hello.jpa.value_type;
+package hello.jpa.value_type_collection;
 
 import lombok.Getter;
-import lombok.Setter;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
 @Embeddable @Getter
 public class Address {
-    @Column(name = "CITY2", length = 20)
     private String city;
     private String street;
     private String zipcode;
 
-    // 기본생성자 필수
-    public Address() { }
+    // 임베디드 값 타입 -> 기본 생성자 필수
+    public Address() {
+    }
 
-    // 값을 할당하기 위한 생성자(불변 객체를 만들기 위해서)
     public Address(String city, String street, String zipcode) {
         this.city = city;
         this.street = street;
         this.zipcode = zipcode;
     }
 
+    // 불변객체 -> setter 제거
+
+    // 값 타입 비교 보장 -> equals() 재정의 필요
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -38,7 +38,10 @@
         <class>hello.jpa.proxy_lazyLoding.cascade.Child</class>
         <class>hello.jpa.proxy_lazyLoding.cascade.Parent</class>-->
 
-        <class>hello.jpa.value_type.Member</class>
+        <!--<class>hello.jpa.value_type.Member</class>-->
+
+        <class>hello.jpa.value_type_collection.Member</class>
+        <class>hello.jpa.value_type_collection.Address</class>
 
         <properties>
             <!-- 필수 속성 -->
