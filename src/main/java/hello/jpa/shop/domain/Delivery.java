@@ -13,14 +13,9 @@ public class Delivery {
     @Column(name = "DELIVERY_ID")
     private Long id;
 
-    @Column(name = "CITY")
-    private String city;
-
-    @Column(name = "STREET")
-    private String street;
-
-    @Column(name = "ZIPCODE")
-    private String zipcode;
+    // 값 타임 임베디드 추가
+    @Embedded
+    private Address address;
 
     @Column(name = "STATUS")
     @Enumerated(EnumType.STRING)

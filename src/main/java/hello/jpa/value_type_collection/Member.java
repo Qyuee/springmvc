@@ -25,7 +25,7 @@ public class Member {
     private Address address;
 
     // 값 타입 컬렉션
-    @ElementCollection
+    @ElementCollection/*(fetch = FetchType.EAGER)*/
     @CollectionTable(name = "FAVORITE_FOODS", joinColumns = @JoinColumn(name = "MEMBER_ID"))
     @Column(name = "FOOD_NAME") // 예외적인 상황: 해당 값은 class가 아니기에 예외적으로 여기서 PK를 설정 할 수 있다.
     private Set<String> favoriteFoods = new HashSet<>();
