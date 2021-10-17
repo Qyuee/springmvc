@@ -1,5 +1,7 @@
 package hello.jpa.JPQL;
 
+import hello.jpa.JPQL.DTO.MemberDTO;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -98,12 +100,58 @@ public class JpqlMain {
                 // 결과가 없으면: NoResultException 발생
                 // 두개 이상이여도 NonUniqueResultException 발생
 
+            // 파라미터 바인딩
             mQuery.setParameter("username", "1번 회원");
+
             List<Member> findMembers2 = mQuery.getResultList();
             for (Member mbr : findMembers2) {
                 System.out.println("mbr.getName :"+mbr.getUsername());
             }
 
+            em.flush();
+            em.clear();
+
+            /* 프로젝션 테스트 */
+            List<Member> findMembers3 = em.createQuery("select m from Member m", Member.class).getResultList();
+            Member member3 = findMembers3.get(0);
+            member3.setAge(40); // DB에 변경이 되면 영속성 컨텍스트에서 관리가 된다는 것 -> update 쿼리가 발생한다. 영속성 컨텍스트에서 관리한다.
+
+            List<Team> findTeams = em.createQuery("select m.team2 from Member m", Team.class).getResultList();
+            Team findTeam2 = findTeams.get(0);
+            System.out.println(findTeam2.getId());
+            findTeam2.setName("1번팀");
+
+            /* 임베디드 프로젝션 */
+            Product product = new Product();
+            product.setName("첫번째 상품");
+            product.setPrice(1000);
+            em.persist(product);
+
+            Address address = new Address("Seoul", "서울", "12345");
+
+            Order order = new Order();
+            order.setOrderAmount(1);
+            order.setProduct(product);
+            order.setAddress(address);
+            em.persist(order);
+
+            // 임베디드 프로젝션은 조인이 발생하지 않는다. 딱 그 값에 대한 쿼리만 실행함
+            List<Address> findAddress = em.createQuery("select o.address from Order o", Address.class).getResultList();
+            for (Address address1 : findAddress) {
+                System.out.println(address1);
+            }
+
+            /* 스칼라 타입 프로젝션 */
+            //List queryType = em.createQuery("select m.username, m.age from Member m").getResultList();
+            // Object[] 배열로 조회
+
+            // DTO로 조회
+            // 패키지명을 포함한 전체 클래스명 입력 필요
+            // 순서와 타입이 일치하는 생성자 필요
+            List<MemberDTO> findMemberDto = em.createQuery("select new hello.jpa.JPQL.DTO.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
+            for (MemberDTO memberDTO : findMemberDto) {
+                System.out.println(memberDTO);
+            }
 
             tx.commit();
         } catch (Exception e) {
