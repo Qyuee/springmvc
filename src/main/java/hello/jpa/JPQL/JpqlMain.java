@@ -27,13 +27,13 @@ public class JpqlMain {
             Member member = new Member();
             member.setUsername("1번 회원");
             member.setAge(20);
-            member.setTeam2(team);
+            member.setTeam(team);
             em.persist(member);
 
             Member member1 = new Member();
             member1.setUsername("2번 회원");
             member1.setAge(30);
-            member1.setTeam2(team);
+            member1.setTeam(team);
             em.persist(member1);
 
             em.flush();
@@ -41,9 +41,9 @@ public class JpqlMain {
 
             System.out.println("==============");
             Member findMember = em.find(Member.class, member.getId());
-            findMember.setTeam2(team1);  // dirty checking, team1 엔티티가 1차 캐시에 있기에
+            findMember.setTeam(team1);  // dirty checking, team1 엔티티가 1차 캐시에 있기에
 
-            Team findTeam = findMember.getTeam2();   // 별도의 쿼리를 전달하지 않음
+            Team findTeam = findMember.getTeam();   // 별도의 쿼리를 전달하지 않음
             System.out.println("==============");
             System.out.println(findTeam.getName());
 

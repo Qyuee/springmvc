@@ -20,7 +20,12 @@ public class Member extends BasicEntity {
     // team에 대한 단방향 연관관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")
-    private Team team2;
+    private Team team;
+
+    public void addTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
 
     @Override
     public String toString() {
