@@ -42,6 +42,7 @@ List<Member> findMemberList = em.createQuery(
 #### typeQuery
 - 반환타입이 명확할 때 사용한다.
 
+---
 
 ### 프로젝션
 - SELECT 절에 조회 할 대상을 지정하는 것.
@@ -52,3 +53,10 @@ List<Member> findMemberList = em.createQuery(
   - 암묵적으로 join 쿼리가 발생한다. 왠만하면 JPQL에도 join 쿼리를 명시해서 혼동을 방지하는게 좋다.
 - 임베디드 프로젝션: select m.address FROM Member m
 - 스칼라 타입 프로젝션: select m.username, m.age FROM Member m
+
+---
+
+### 페이징
+- JPA는 페이징을 두 개의 API로 추상화 해놓았다.
+1. setFirstResult()
+2. setMaxResults()

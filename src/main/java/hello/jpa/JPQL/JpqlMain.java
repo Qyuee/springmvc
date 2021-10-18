@@ -153,6 +153,19 @@ public class JpqlMain {
                 System.out.println(memberDTO);
             }
 
+            em.flush();
+            em.clear();
+
+            /* 페이징 */
+            List<Member> memberPaging = em.createQuery("select m from Member m ORDER BY m.age DESC", Member.class)
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            for (Member pagingMbr : memberPaging) {
+                System.out.println("pagingMbr = " + pagingMbr);
+            }
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
