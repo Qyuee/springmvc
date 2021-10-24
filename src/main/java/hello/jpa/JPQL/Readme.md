@@ -112,3 +112,53 @@ inner join
 // 실제 쿼리
 select m.username from Team t inner join Member m on t.id = m.team_id
 ```
+
+### Fetch join
+- SQL join의 종류가 아니다.
+- JSQL에서 성능 최적화를 위해서 제공하는 기능
+- 연관된 엔티티나 컬렉션을 한번에 조회 할 수 있는 기능
+- 즉시로딩이다. (지연로딩 따윈 없다.)
+- 상황에 따라서 지연로딩을 할 것인지 페치조인으로 할 것인지 결정해야한다. (어떤게 더 이득일지 고민해야함)
+
+
+### 엔티티 페치 조인
+- 회원을 조회하면서 연관된 팀의 정보도 함께 조회한다. (SQL이 한번만 발생한다.)
+- select m from Member m join fetch m.team
+
+### 컬렉션 페치 조인
+- 일다대 관계에서의 페치조인이다.
+- Team의 입장에서 Member에 대한 조인을 하는 경우 팀1개에는 여러N명의 회원이 있을 수 있기 때문이다.
+    - 여기서 주의해야 할 점이 있다.
+    Team의 입장에서는 Member에 대한 조인을 걸면 회원이 N명이 있을 수 있기에 동일한 조인의 결과가 N개로 표현된다.  
+
+[SQL을 직접 실행한 경우]
+- 조인의 결과가 `팀A`에 회원2명, `팀B`에 회원1명 이기에 총 3개의 row가 표시된다.
+![](.Readme_images/4b465f65.png)  
+
+[JPQL 실행]
+- JPA의 입장에서는 위의 DB의 join의 결과인 3개의 row를 그대로 받아오기 때문에 중복에 대한 자체적인 처리 방법이 없다. 
+```java
+String collectionFetchJoin = "select t from Team t join fetch t.members m";
+List<Team> resultTeams = em.createQuery(collectionFetchJoin, Team.class).getResultList();
+for (Team t : resultTeams) {
+    System.out.println("team name = " + t.getName()+", members size = "+t.getMembers().size());
+}
+```
+![](.Readme_images/3f1cc875.png)
+
+
+방안: [중복된 결과를 제거하기 위해서 DISTINCT를 사용한다.]
+1. SQL에 DISTINCT를 추가한다.
+    - SQL에 distinct를 추가하지만 데이터가 다르기에 중복을 제거 할 수 없다.
+    - `String collectionFetchJoin = "select distinct t from Team t join fetch t.members m";`
+2. 애플리케이션에서 엔티티 중복을 제거한다.
+    - JPA가 distinct를 보고 중복을 애플리케이션 내에서 제거처리한다. (JPA가 걸러준 것임)
+    
+
+### 일반조인과 페치조인의 차이는?
+- `일반조인은 연관된 엔티티를 함게 조회하지 않는다.` -> 가장 중요
+- 일반조인은 JPQL의 결과를 반환 할 때, 연관관계를 고려하지 않는다.
+    - 단지, select절에 있는 엔티티만 조회 할 뿐이다.
+- 페치조인을 사용 할 때만 연관된 엔티티도 함께 조회한다. (즉시로딩)
+- 페치조인은 객체 그래프를 SQL 한번에 모두 조회하는 개념
+- 대다수의 N+1 이슈가 해결된다. (안되는 경우도 있나보다,,)
