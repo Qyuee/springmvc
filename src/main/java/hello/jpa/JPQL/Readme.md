@@ -60,3 +60,55 @@ List<Member> findMemberList = em.createQuery(
 - JPA는 페이징을 두 개의 API로 추상화 해놓았다.
 1. setFirstResult()
 2. setMaxResults()
+
+
+### 경로 표현식
+- .(점)을 찍어서 객체 그래프를 탐색하는 것
+```sql
+select m.username -> 상태 필드
+ from Member m 
+ join m.team t -> 단일 값 연관 필드
+ join m.orders o -> 컬렉션 값 연관 필드
+where t.name = '팀A'
+```
+- 상태필드: 단순히 값을 저장하기 위한 필드
+- 연관필드: 연관관계를 위한 필드
+ - 단일 값 연관 필드: @ManyToOne, @OneToOne, 대상이 엔티티인 경우
+ - 컬렉션 값 연관 필드: @OneToMany, @ManyToMany, 대상이 컬렉션인 경우
+
+### 경로 표현식의 특징
+- 상태필드: 경로 탐색의 끝, 탐색X
+- 단일 값 연관 필드: 묵시적인 join 쿼리가 발생한다. 탐색 불가
+- 컬렉션 값 연관 필드: 묵시적인 join 쿼리가 발생한다. 탐색이 가능.
+
+```
+묵시적인 join(inner join만 가능)은 쿼리 튜닝 및 유지보수에 있어서 혼란을 불러일으킨다.
+명시적으로 join을 사용하는 것이 좋다.
+```
+
+JPQL: select m.username, m.age from Member m
+SQL: select username, age from Member
+
+JPQL: select o.member from Orders o
+SQL: select m.* from Orders o inner join Member m on o.member_id = m.id (묵시적인 join 발생)
+
+### 경로탐색 주의사항
+- 묵시적인 join은 항상 inner 조인이다. (그 외에는 명시적으로 사용해야함.)
+- 컬렉션은 경로탐색의 끝이다. 그 이상의 경로탐색을 하고 싶으면 명시적인 join과 함께 별칭을 부여해야한다.
+ex) select t.members(컬렉션) from Team t -> t.members.username (불가)
+  select m.username from Team t inner join t.members m (가능)
+```sql 
+select m.username from Team t inner join t.members m 어떻게 SQL 쿼리로 변환될까?
+
+// JPA가 만든 쿼리
+select
+    members1_.USERNAME as col_0_0_ 
+from
+    JPQL_TEAM team0_ 
+inner join
+    JPQL_MBR members1_ 
+        on team0_.id=members1_.TEAM_ID
+        
+// 실제 쿼리
+select m.username from Team t inner join Member m on t.id = m.team_id
+```
