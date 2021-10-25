@@ -158,9 +158,13 @@ public class FetchJoinMain {
             }*/
 
 
-            /* 컬렉션 패치 조인 */
-            String collectionFetchJoin = "select distinct t from Team t join fetch t.members m";
-            List<Team> resultTeams = em.createQuery(collectionFetchJoin, Team.class).getResultList();
+            /* 컬렉션 패치 조인 (일대다) */
+            String collectionFetchJoin = "select distinct t from Team t";
+            List<Team> resultTeams = em.createQuery(collectionFetchJoin, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
+                    .getResultList();
+
             for (Team t : resultTeams) {
                 System.out.println("team name = " + t.getName()+", members size = "+t.getMembers().size());
             }
