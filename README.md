@@ -1,7 +1,7 @@
 ````
 `자바 ORM 표준 JPA 프로그래밍 - 기본편`
 - https://www.inflearn.com/course/ORM-JPA-Basic
-- 기간: 2021-10 ~ 진행중
+- 기간: 2021-10-05 ~ 2021-10-25 (완료)
 ````
 - JPA는 인터페이스의 모음이다.
 - JPA 스펙을 구현한 구현체는 여러가지가 있다. (Hibernate, EclipseLink 등등)

@@ -44,10 +44,14 @@
         <class>hello.jpa.value_type_collection.Address</class>-->
 
         <!-- JPQL -->
-        <class>hello.jpa.JPQL.Member</class>
+        <!--<class>hello.jpa.JPQL.Member</class>
         <class>hello.jpa.JPQL.Team</class>
         <class>hello.jpa.JPQL.Order</class>
-        <class>hello.jpa.JPQL.Product</class>
+        <class>hello.jpa.JPQL.Product</class>-->
+
+        <!-- Named Query -->
+        <class>hello.jpa.named_query.Member</class>
+        <class>hello.jpa.named_query.Team</class>
 
         <properties>
             <!-- 필수 속성 -->
